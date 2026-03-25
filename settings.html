@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Web App</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+    </head>
+
+    <body class="bg-[#1f1f1f] text-white p-3">
+
+        <!-- HEADER -->
+        <header
+            class="bg-[#2E3033] shadow-md p-4 flex justify-between items-center rounded-full">
+            <h1 class="text-xl font-bold pl-3">Gpay</h1>
+            <button class="bg-blue-600  rounded-full"><img
+                    src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                    alt width="50px"></button>
+        </header>
+
+        <section>
+            <div class="bg-[#1f1f1f] rounded-2xl p-5 shadow-lg">
+
+                <div class="flex justify-between items-center text-sm text-gray-300 mt-5">
+
+                    <img
+                        src="https://images.seeklogo.com/logo-png/17/2/sbi-logo-png_seeklogo-177051.png"
+                        class="w-10 h-10 object-contain bg-white rounded-full">
+
+                    <div>
+                        <p>State Bank of India</p>
+                        <p class="text-gray-500">Savings •••• 9093</p>
+                    </div>
+                    <button onclick="window.location.href='balance.html'" class="text-blue-400">check balance</button>
+
+                </div>
+
+            </div>
+            <div class="flex flex-col md:flex-row items-center">
+                <button onclick="clearAllData()" 
+                    class="mt-20 bg-gradient-to-r from-red-500 to-red-700 text-white px-6 py-3 rounded-full font-semibold hover:from-red-600 hover:to-red-800 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-xl">
+                    clear all data
+                </button>
+            </div>
+        </section>
+
+        <!-- BOTTOM NAVBAR -->
+        <nav
+            class="bg-[#2E3033] fixed bottom-0 left-0 w-full  flex justify-around p-3 border-t border-gray-700">
+            <button onclick="window.location.href='index.html'"><i
+                    class="fa-solid fa-house"></i><br>Home</button>
+            <button onclick="window.location.href='transaction_history.html'"><i
+                    class="fa-solid fa-clock-rotate-left"></i><br>History</button>
+            <button onclick="window.location.href='settings.html'"
+                class="text-blue-400"><i
+                    class="fa-solid fa-gear"></i><br>Settings</button>
+        </nav>
+
+    </body>
+
+    <script>
+// Initialize balance if not exists
+if (!localStorage.getItem("balance")) {
+    localStorage.setItem("balance", 1000);
+}
+
+// Initialize transactions
+if (!localStorage.getItem("transactions")) {
+    localStorage.setItem("transactions", JSON.stringify([]));
+}
+
+function autoAddDailyMoney() {
+    let balance = parseFloat(localStorage.getItem("balance")) || 0;
+
+    const lastAddedDate = localStorage.getItem("lastAddedDate");
+
+    const now = new Date();
+    const today = now.toDateString(); // Example: "Wed Mar 25 2026"
+
+    // Check if already added today
+    if (lastAddedDate !== today) {
+
+        // Check if time is after 12 AM
+        if (now.getHours() >= 0) {
+
+            balance += 100000;
+
+            localStorage.setItem("balance", balance);
+            localStorage.setItem("lastAddedDate", today);
+
+            console.log("₹100000 added for today");
+        }
+    }
+}
+
+// Run automatically
+autoAddDailyMoney();
+
+
+function clearAllData() {
+
+    const confirmReset = confirm("Are you sure you want to clear all data?");
+
+    if (confirmReset) {
+        localStorage.clear();
+
+        alert("All data cleared!");
+
+        // Optional: Reload app
+        window.location.href = "index.html";
+    }
+}
+
+</script>
+</html>

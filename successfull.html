@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @keyframes pingOnce {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-ping-once {
+            animation: pingOnce 0.6s ease-out;
+        }
+
+        .amount {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+        
+    </style>
+</head>
+
+<body class="bg-[#1f1f1f] text-white">
+
+    <div class="flex flex-col items-center justify-center h-screen text-center px-4">
+
+        <!-- ✅ Blue Tick -->
+        <div 
+            class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-10 shadow-lg animate-ping-once">
+            <i class="fa-solid fa-check text-white text-3xl"></i>
+
+        </div>
+       
+
+
+        <!-- 💰 Amount -->
+        <h1 id="displayAmount" class="amount text-4xl text-white mb-6">₹200.00</h1>
+
+        <!-- 📄 Details -->
+        <p class="text-white text-sm mb-1">Paid to</p>
+        <h2 id="displayName" class="text-2xl font-semibold text-white mb-3">Ajith
+            Peechamannil</h2>
+
+        <!-- Banking Info -->
+        <div class="flex items-center gap-2 text-white mb-3">
+
+            <!-- ✅ Verified Shield Icon -->
+            <div class="w-6 h-6 flex items-center justify-center">
+                <img src="https://www.compliancegate.com/wp-content/uploads/2021/12/compliance-check.png" alt>
+            </div>
+
+            <p id="displayBank" class="text-sm text-white">Banking name: AJITH P M</p>
+        </div>
+
+        <!-- Date -->
+        <p id="displayDate" class="text-white text-sm font-medium"></p>
+        <button onclick="window.location.href='transaction_history.html'" type="button"
+    class="w-20 mt-3 py-2 rounded-full border hover:bg-gray-700 transition">
+    Done
+</button>
+
+    </div>
+
+</body>
+<!-- ⚙️ Script -->
+<script>
+
+
+    
+    function updateDateTime() {
+    const now = new Date();
+
+    const options = {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    };
+
+    const formatted = now.toLocaleString('en-IN', options);
+
+    document.getElementById("displayDate").textContent = formatted;
+}
+
+// Run immediately
+updateDateTime();
+
+// Update every second
+setInterval(updateDateTime, 1000);
+
+// Initialize balance if not exists
+if (!localStorage.getItem("balance")) {
+    localStorage.setItem("balance", 1000);
+}
+
+// Initialize transactions
+if (!localStorage.getItem("transactions")) {
+    localStorage.setItem("transactions", JSON.stringify([]));
+}
+const data = JSON.parse(localStorage.getItem("lastTransaction"));
+
+if (data) {
+    document.getElementById("displayAmount").textContent = "₹" + data.amount;
+    document.getElementById("displayName").textContent = data.name;
+    document.getElementById("displayBank").textContent = "Note: " + data.note;
+}
+
+</script>
+
+</html>

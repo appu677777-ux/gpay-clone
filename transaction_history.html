@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-[#1f1f1f] text-white p-3">
+
+    <!-- HEADER -->
+    <header class="bg-[#2E3033] shadow-md p-4 flex justify-between items-center rounded-full">
+        <h1 class="text-xl font-bold pl-3">Gpay</h1>
+        <button class="bg-blue-600  rounded-full"><img
+                src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png" alt=""
+                width="50px"></button>
+    </header>
+
+    <!-- TRANSACTION HISTORY -->
+    <section>
+        <div class="flex items-center justify-between bg-[#2E3033] p-4 rounded-full mt-10 shadow-md">
+
+            <h1 class="text-lg font-semibold">
+                Transaction History
+            </h1>
+
+            <i class="fa-solid fa-clock-rotate-left text-blue-400 text-xl"></i>
+
+        </div>
+
+        <div class="flex-column items-center justify-between bg-[#2E3033] p-4 rounded-lg mt-10 shadow-md">
+            <!-- Transaction 1 -->
+            <div class="flex items-center justify-between gap-20  p-3 rounded-xl shadow-sm">
+
+                <!-- LEFT SECTION -->
+                <div class="flex items-center gap-3">
+                    <img src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                        class="w-12 h-12 rounded-full">
+
+                    <div>
+                        <h1 class="text-sm font-semibold">John Doe</h1>
+                        <h2 class="text-xs text-gray-400">25 Mar 2026</h2>
+                    </div>
+                </div>
+
+                <!-- RIGHT SECTION -->
+                <h1 class="text-green-400 font-semibold text-sm">
+                    + ₹500
+                </h1>
+
+            </div>
+            <!-- transaction 2 -->
+            <div class="flex items-center justify-between gap-20  p-3 rounded-xl shadow-sm">
+
+                <!-- LEFT SECTION -->
+                <div class="flex items-center gap-3">
+                    <img src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                        class="w-12 h-12 rounded-full">
+
+                    <div>
+                        <h1 class="text-sm font-semibold">John Doe</h1>
+                        <h2 class="text-xs text-gray-400">25 Mar 2026</h2>
+                    </div>
+                </div>
+
+                <!-- RIGHT SECTION -->
+                <h1 class="text-green-400 font-semibold text-sm">
+                    + ₹500
+                </h1>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- BOTTOM NAVBAR -->
+    <nav class="bg-[#2E3033] fixed bottom-0 left-0 w-full  flex justify-around p-3 border-t border-gray-700">
+        <button onclick="window.location.href='index.html'"><i class="fa-solid fa-house"></i><br>Home</button>
+        <button onclick="window.location.href='transaction_history.html'" class="text-blue-400"><i
+                class="fa-solid fa-clock-rotate-left"></i><br>History</button>
+        <button onclick="window.location.href='settings.html'"><i class="fa-solid fa-gear"></i><br>Settings</button>
+    </nav>
+
+</body>
+<script>
+const container = document.querySelector(".flex-column");
+
+const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+container.innerHTML = "";
+
+transactions.forEach(tx => {
+    container.innerHTML += `
+    <div class="flex items-center justify-between gap-20 p-3 rounded-xl shadow-sm">
+        <div class="flex items-center gap-3">
+            <img src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                class="w-12 h-12 rounded-full">
+
+            <div>
+                <h1 class="text-sm font-semibold">${tx.name}</h1>
+                <h2 class="text-xs text-gray-400">${tx.date}</h2>
+            </div>
+        </div>
+
+        <h1 class="text-red-400 w-40 font-semibold text-sm">
+            - ₹${tx.amount}
+        </h1>
+    </div>
+    `;
+});
+</script>
+<script>
+// Initialize balance if not exists
+if (!localStorage.getItem("balance")) {
+    localStorage.setItem("balance", 1000);
+}
+
+// Initialize transactions
+if (!localStorage.getItem("transactions")) {
+    localStorage.setItem("transactions", JSON.stringify([]));
+}
+</script>
+
+</html>

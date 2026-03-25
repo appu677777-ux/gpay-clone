@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Web App</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+    </head>
+
+    <body class="bg-[#1f1f1f] text-white p-3">
+
+        <!-- HEADER -->
+        <header
+            class="bg-[#2E3033] shadow-md p-4 flex justify-between items-center rounded-full">
+            <h1 class="text-xl font-bold pl-3">Gpay</h1>
+            <button class="bg-blue-600  rounded-full"><img
+                    src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
+                    alt
+                    width="50px"></button>
+        </header>
+
+        <section>
+            <div
+                class="flex flex-col md:flex-row items-center justify-between gap-6 p-6">
+
+                <!-- Text Section -->
+                <h1
+                    class="md:w-2/5 text-2xl md:text-4xl font-semibold leading-snug text-gray-400">
+                    Make payment with UPI transactions
+                </h1>
+
+                <!-- Image Section -->
+                <img
+                    src="https://cdni.iconscout.com/illustration/premium/thumb/online-payment-illustration-download-in-svg-png-gif-file-formats--money-finance-pack-business-illustrations-8266124.png"
+                    alt="UPI Payment"
+                    class="w-48 md:w-64 h-auto object-contain">
+
+            </div>
+            <div class="flex flex-col md:flex-row items-center">
+                <button onclick="window.location.href='payment.html'"
+                    class="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-blue-800 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-xl">
+                    Make Payment
+                </button>
+            </div>
+
+        </section>
+        
+
+        <!-- BOTTOM NAVBAR -->
+        <nav
+            class="bg-[#2E3033] fixed bottom-0 left-0 w-full  flex justify-around p-3 border-t border-gray-700">
+            <button onclick="window.location.href='index.html'"
+                class="text-blue-400"><i
+                    class="fa-solid fa-house"></i><br>Home</button>
+            <button onclick="window.location.href='transaction_history.html'"><i
+                    class="fa-solid fa-clock-rotate-left"></i><br>History</button>
+            <button onclick="window.location.href='settings.html'"><i
+                    class="fa-solid fa-gear"></i><br>Settings</button>
+        </nav>
+
+
+
+        <!-- 🔐 LOCK SCREEN -->
+<div id="lockScreen" class="fixed inset-0 bg-[#1f1f1f] flex items-center justify-center z-50">
+
+    <div class="text-center space-y-6">
+        <h1 class="text-xl font-semibold">Enter PIN</h1>
+
+        <!-- PIN Display -->
+        <div id="pinDots" class="flex justify-center gap-3">
+            <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
+            <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
+            <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
+            <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
+        </div>
+
+        <!-- PIN KEYPAD -->
+        <div class="grid grid-cols-3 gap-4 mt-5">
+            <button onclick="enterPin(1)" class="pin-btn">1</button>
+            <button onclick="enterPin(2)" class="pin-btn">2</button>
+            <button onclick="enterPin(3)" class="pin-btn">3</button>
+            <button onclick="enterPin(4)" class="pin-btn">4</button>
+            <button onclick="enterPin(5)" class="pin-btn">5</button>
+            <button onclick="enterPin(6)" class="pin-btn">6</button>
+            <button onclick="enterPin(7)" class="pin-btn">7</button>
+            <button onclick="enterPin(8)" class="pin-btn">8</button>
+            <button onclick="enterPin(9)" class="pin-btn">9</button>
+            <div></div>
+            <button onclick="enterPin(0)" class="pin-btn">0</button>
+            <button onclick="clearPin()" class="pin-btn bg-red-500">⌫</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.pin-btn {
+    background: #2E3033;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 18px;
+}
+.pin-btn:active {
+    transform: scale(0.9);
+}
+</style>
+
+    </body>
+
+    <script>
+let enteredPin = "";
+
+// Default PIN (first time)
+if (!localStorage.getItem("appPin")) {
+    localStorage.setItem("appPin", "5588");
+}
+
+function enterPin(num) {
+    if (enteredPin.length < 4) {
+        enteredPin += num;
+        updateDots();
+    }
+
+    if (enteredPin.length === 4) {
+        checkPin();
+    }
+}
+
+function updateDots() {
+    const dots = document.querySelectorAll("#pinDots div");
+
+    dots.forEach((dot, index) => {
+        dot.style.background = index < enteredPin.length ? "#3b82f6" : "#6b7280";
+    });
+}
+
+function clearPin() {
+    enteredPin = enteredPin.slice(0, -1);
+    updateDots();
+}
+
+function checkPin() {
+    const savedPin = localStorage.getItem("appPin");
+
+    if (enteredPin === savedPin) {
+        document.getElementById("lockScreen").style.display = "none";
+    } else {
+        alert("Wrong PIN ❌");
+        enteredPin = "";
+        updateDots();
+    }
+}
+</script>
+
+   <script>
+// Initialize balance if not exists
+if (!localStorage.getItem("balance")) {
+    localStorage.setItem("balance", 1000);
+}
+
+// Initialize transactions
+if (!localStorage.getItem("transactions")) {
+    localStorage.setItem("transactions", JSON.stringify([]));
+}
+</script>
+
+</html>

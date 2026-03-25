@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-[#1f1f1f] text-white p-3 ">
+  
+           <div class="flex justify-end mb-5 mr-5">
+    <button onclick="goBack()" class="text-white">
+        <i class="fa-solid fa-arrow-left"></i><br>Back
+    </button>
+</div>
+
+        <section>
+
+            <div class="bg-[#1f1f1f] rounded-2xl p-5 shadow-lg border">
+                <form
+                    class="max-w-md mx-auto  p-6 rounded-2xl bg-[#1f1f1f] shadow-lg space-y-5">
+
+                    <!-- Phone -->
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-600 mb-1">
+                            Phone Number
+                        </label>
+                        <input
+                            type="number"
+                            placeholder="Enter phone number"
+                            class="w-full px-4 py-3 border rounded-xl bg-[#1f1f1f] focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <!-- Amount -->
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-600 mb-1">
+                            Amount
+                        </label>
+                        <div
+                            class="flex items-center border rounded-xl px-3 focus-within:ring-2 focus-within:ring-blue-500">
+                            <span class="text-gray-500 text-lg mr-2">₹</span>
+                            <input
+                                type="number"
+                                placeholder="Enter amount"
+                                class="bg-[#1f1f1f] w-full py-3 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Note -->
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-600 mb-1">
+                            Note
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Add a note"
+                            class="bg-[#1f1f1f] w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <!-- Button -->
+                    <button onclick="openPopup()" type="button"
+                        class="bg-gradient-to-r from-blue-500 to-blue-700 ml-10 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-blue-800 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-xl">
+                        Make Payment
+                    </button>
+                    <!-- PAYMENT CONFIRM POPUP -->
+                    <div id="paymentPopup"
+                        class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+
+                        <div
+                            class="bg-[#2E3033] text-white w-80 rounded-2xl p-6 shadow-xl text-center space-y-4">
+
+                            <h2 class="text-lg font-semibold">Confirm
+                                Payment</h2>
+                            <p class="text-gray-400 text-sm">Are you sure you
+                                want to proceed?</p>
+
+                            <div class="flex justify-between gap-4 mt-4">
+
+                                <!-- Cancel -->
+                                <button onclick="closePopup()" type="button"
+    class="w-1/2 py-2 rounded-full bg-gray-600 hover:bg-gray-700 transition">
+    Cancel
+</button>
+
+                                <!-- Confirm -->
+                                <button onclick="confirmPayment()" type="button"
+    class="w-1/2 py-2 rounded-full bg-blue-600 hover:bg-blue-700 transition">
+    Confirm
+</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+        
+         
+        
+
+    </body>
+    <script>
+function openPopup() {
+    document.getElementById("paymentPopup").classList.remove("hidden");
+    document.getElementById("paymentPopup").classList.add("flex");
+}
+
+function closePopup() {
+    document.getElementById("paymentPopup").classList.add("hidden");
+    document.getElementById("paymentPopup").classList.remove("flex");
+}
+
+function confirmPayment() {
+    closePopup();
+
+    const inputs = document.querySelectorAll("input");
+
+    const phone = inputs[0].value;
+    const amount = parseFloat(inputs[1].value);
+    const note = inputs[2].value || "Payment";
+
+    let balance = parseFloat(localStorage.getItem("balance"));
+
+    if (!phone || !amount) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    if (amount > balance) {
+        alert("Insufficient balance");
+        return;
+    }
+
+    // Deduct balance
+    balance -= amount;
+    localStorage.setItem("balance", balance);
+
+    // Save last transaction (for success page)
+    const transaction = {
+        name: phone,
+        amount: amount,
+        note: note,
+        date: new Date().toLocaleString("en-IN")
+    };
+
+    localStorage.setItem("lastTransaction", JSON.stringify(transaction));
+
+    // Save to history
+    let transactions = JSON.parse(localStorage.getItem("transactions"));
+    transactions.unshift(transaction);
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+
+    // Redirect
+    window.location.href = "successfull.html";
+}
+
+// Initialize balance if not exists
+if (!localStorage.getItem("balance")) {
+    localStorage.setItem("balance", 1000);
+}
+
+// Initialize transactions
+if (!localStorage.getItem("transactions")) {
+    localStorage.setItem("transactions", JSON.stringify([]));
+}
+</script>
+
+<script>
+function goBack() {
+    if (history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = "index.html";
+    }
+}
+</script>
+</html>

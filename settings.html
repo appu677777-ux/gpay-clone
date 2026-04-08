@@ -82,21 +82,34 @@ function autoAddDailyMoney() {
     const lastAddedDate = localStorage.getItem("lastAddedDate");
 
     const now = new Date();
-    const today = now.toDateString(); // Example: "Wed Mar 25 2026"
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    // Check if already added today
-    if (lastAddedDate !== today) {
+    // If no previous record → set today and exit
+    if (!lastAddedDate) {
+        localStorage.setItem("lastAddedDate", today.toISOString());
+        return;
+    }
 
-        // Check if time is after 12 AM
-        if (now.getHours() >= 0) {
+    const lastDate = new Date(lastAddedDate);
 
-            balance += 100000;
+    // Calculate difference in days
+    const diffTime = today - new Date(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-            localStorage.setItem("balance", balance);
-            localStorage.setItem("lastAddedDate", today);
+    if (diffDays > 0) {
+        const dailyAmount = 100000;
 
-            console.log("₹100000 added for today");
-        }
+        const totalToAdd = diffDays * dailyAmount;
+
+        balance += totalToAdd;
+
+        localStorage.setItem("balance", balance);
+        localStorage.setItem("lastAddedDate", today.toISOString());
+
+        // ✅ ADD THIS LINE HERE
+        alert(`₹${totalToAdd} added for ${diffDays} days!`);
+
+        console.log(`₹${totalToAdd} added for ${diffDays} missed days`);
     }
 }
 

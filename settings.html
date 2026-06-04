@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Web App</title>
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    </head>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
 
-    <body class="bg-[#1f1f1f] text-white p-3">
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 
-        <!-- HEADER -->
-        <header
-            class="bg-[#2E3033] shadow-md p-4 flex justify-between items-center rounded-full">
-            <h1 class="text-xl font-bold pl-3">Gpay</h1>
-            <button class="bg-blue-600  rounded-full"><img
-                    src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png"
-                    alt width="50px"></button>
-        </header>
+</head>
 
+<body class="bg-[#1f1f1f] text-white">
+    <!-- HEADER -->
+    <header class="  flex justify-between items-center h-[170px]">
+        <img src="/gpay-illu.avif" alt>
+
+    </header>
+    <div class="p-3">
         <section>
-            <div class="bg-[#1f1f1f] rounded-2xl p-5 shadow-lg">
+            <div class="bg-[#1f1f1f] rounded-2xl p-5 shadow-lg mb-2">
 
-                <div class="flex justify-between items-center text-sm text-gray-300 mt-5">
+                <div class="flex justify-between items-center text-sm text-gray-300 mt-2">
 
-                    <img
-                        src="https://images.seeklogo.com/logo-png/17/2/sbi-logo-png_seeklogo-177051.png"
+                    <img src="https://images.seeklogo.com/logo-png/17/2/sbi-logo-png_seeklogo-177051.png"
                         class="w-10 h-10 object-contain bg-white rounded-full">
 
                     <div>
@@ -43,96 +48,149 @@
                 </div>
 
             </div>
+
+            <div class="bg-[#1f1f1f] rounded-2xl p-5 shadow-lg ">
+
+                <div class="flex gap-9 items-center text-sm text-gray-300 mt-2">
+
+                    <img src="https://png.pngtree.com/png-clipart/20200226/original/pngtree-credit-score-meter-design-art-png-image_5326464.jpg"
+                        class="w-50 h-10 object-contain bg-white rounded-full">
+
+                    <div>
+                        <p>CIBIL score</p>
+                        <p class="text-gray-500">Check for
+                            free,instantly</p>
+                    </div>
+                    <button class="text-blue-400 pl-5">check</button>
+
+                </div>
+
+            </div>
+
+            <div class="p-3">
+                <h1 class>Credit for you</h1>
+                <div class="flex">
+                    <div class="bg-[#1f1f1f] rounded-2xl p-5 shadow-lg w-[50%] h-[200px] ">
+                        <img src="https://png.pngtree.com/png-clipart/20230524/original/pngtree-money-bag-vector-png-image_9168976.png"
+                            class="w-50 h-10 object-contain bg-white rounded-full mb-2">
+                        <h2>Personal loan</h2>
+                        <p class="text-gray-400 mb-2">Up to ₹25 lakh,
+                            instant approval</p>
+                        <button class="text-blue-400 ">check
+                            details</button>
+                    </div>
+                    <div class="bg-[#1f1f1f] rounded-2xl p-5 shadow-lg w-[50%] h-[200px]">
+                        <img src="https://png.pngtree.com/png-clipart/20210311/original/pngtree-blue-grid-credit-card-clip-art-png-image_6025101.png"
+                            class="w-50 h-10 object-contain bg-white rounded-full mb-2">
+                        <h2>Personal loan</h2>
+                        <p class="text-gray-400 mb-2">Up to ₹25 lakh,
+                            instant approval</p>
+                        <button class="text-blue-400 ">Explore</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex flex-col md:flex-row items-center">
-                <button onclick="clearAllData()" 
-                    class="mt-20 bg-gradient-to-r from-red-500 to-red-700 text-white px-6 py-3 rounded-full font-semibold hover:from-red-600 hover:to-red-800 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-xl">
+                <button onclick="clearAllData()"
+                    class="mt-20 bg-gradient-to-r from-black-500 to-black-700 text-white px-6 py-3 rounded-full hover:from-red-600 hover:to-red-800 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-xl">
                     clear all data
                 </button>
             </div>
         </section>
 
         <!-- BOTTOM NAVBAR -->
-        <nav
-            class="bg-[#2E3033] fixed bottom-0 left-0 w-full  flex justify-around p-3 border-t border-gray-700">
-            <button onclick="window.location.href='index.html'"><i
-                    class="fa-solid fa-house"></i><br>Home</button>
+        <nav class="bg-[#2E3033] fixed bottom-0 left-0 w-full  flex justify-around p-3 border-t border-gray-700">
+            <button onclick="window.location.href='index.html'"><i class="fa-solid fa-house"></i><br>Home</button>
             <button onclick="window.location.href='transaction_history.html'"><i
                     class="fa-solid fa-clock-rotate-left"></i><br>History</button>
-            <button onclick="window.location.href='settings.html'"
-                class="text-blue-400"><i
+            <button onclick="window.location.href='settings.html'" class="text-blue-400"><i
                     class="fa-solid fa-gear"></i><br>Settings</button>
         </nav>
+    </div>
+    <div class="h-[100px]">
 
-    </body>
+    </div>
 
-    <script>
-// Initialize balance if not exists
-if (!localStorage.getItem("balance")) {
-    localStorage.setItem("balance", 1000);
-}
+</body>
 
-// Initialize transactions
-if (!localStorage.getItem("transactions")) {
-    localStorage.setItem("transactions", JSON.stringify([]));
-}
-
-function autoAddDailyMoney() {
-    let balance = parseFloat(localStorage.getItem("balance")) || 0;
-
-    const lastAddedDate = localStorage.getItem("lastAddedDate");
-
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-    // If no previous record → set today and exit
-    if (!lastAddedDate) {
-        localStorage.setItem("lastAddedDate", today.toISOString());
-        return;
+<script>
+    // Initialize balance if not exists
+    if (!localStorage.getItem("balance")) {
+        localStorage.setItem("balance", 1000);
     }
 
-    const lastDate = new Date(lastAddedDate);
-
-    // Calculate difference in days
-    const diffTime = today - new Date(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate());
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays > 0) {
-        const dailyAmount = 100000;
-
-        const totalToAdd = diffDays * dailyAmount;
-
-        balance += totalToAdd;
-
-        localStorage.setItem("balance", balance);
-        localStorage.setItem("lastAddedDate", today.toISOString());
-
-        // ✅ ADD THIS LINE HERE
-        alert(`₹${totalToAdd} added for ${diffDays} days!`);
-
-        console.log(`₹${totalToAdd} added for ${diffDays} missed days`);
+    // Initialize transactions
+    if (!localStorage.getItem("transactions")) {
+        localStorage.setItem("transactions", JSON.stringify([]));
     }
 
-    
+    function autoAddDailyMoney() {
+        let balance = parseFloat(localStorage.getItem("balance")) || 0;
 
-}
+        const lastAddedDate = localStorage.getItem("lastAddedDate");
 
-// Run automatically
-autoAddDailyMoney();
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
+        // If no previous record → set today and exit
+        if (!lastAddedDate) {
+            localStorage.setItem("lastAddedDate", today.toISOString());
+            return;
+        }
 
-function clearAllData() {
+        const lastDate = new Date(lastAddedDate);
 
-    const confirmReset = confirm("Are you sure you want to clear all data?");
+        // Calculate difference in days
+        const diffTime = today - new Date(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate());
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    if (confirmReset) {
-        localStorage.clear();
+        if (diffDays > 0) {
+            const dailyAmount = 100000;
 
-        alert("All data cleared!");
+            const totalToAdd = diffDays * dailyAmount;
 
-        // Optional: Reload app
-        window.location.href = "index.html";
+            balance += totalToAdd;
+
+            localStorage.setItem("balance", balance);
+            localStorage.setItem("lastAddedDate", today.toISOString());
+
+            // ✅ ADD THIS LINE HERE
+            alert(`₹${totalToAdd} added for ${diffDays} days!`);
+
+            console.log(`₹${totalToAdd} added for ${diffDays} missed days`);
+        }
+
+        //     if (true) {
+        //     const dailyAmount = 2500000;
+
+        //     const totalToAdd = 1 * dailyAmount;
+
+        //     balance += totalToAdd;
+
+        //     localStorage.setItem("balance", balance);
+
+        //     alert(`₹${totalToAdd} added for testing!`);
+        // }
     }
-}
+
+    // Run automatically
+    autoAddDailyMoney();
+
+
+    function clearAllData() {
+
+        const confirmReset = confirm("Are you sure you want to clear all data?");
+
+        if (confirmReset) {
+            localStorage.clear();
+
+            alert("All data cleared!");
+
+            // Optional: Reload app
+            window.location.href = "index.html";
+        }
+    }
 
 </script>
+
 </html>
